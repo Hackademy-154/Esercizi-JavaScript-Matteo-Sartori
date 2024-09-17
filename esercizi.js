@@ -453,14 +453,14 @@ function cose(a) {
 
   let riordina = a.sort((a, b) => a - b);
 
-  let minori = [];
-  let maggiori = [];
+  let minori;
+  let maggiori;
 
-  minori.push(riordina.slice(0, 3));
-  maggiori.push(riordina.slice(Math.max(riordina.length - 3, 1)));
+  minori = riordina.slice(0, 3);
+  maggiori = riordina.slice(Math.max(riordina.length - 3, 1));
 
   console.log(
-    `Media: ${media}\nNumeri Minori: [${minori}]\nNumeri Maggiori: [${maggiori}]`
+    `Media: ${media}\nNumeri Minori: ${minori}\nNumeri Maggiori: ${maggiori}`
   );
 }
 cose(a);
