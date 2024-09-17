@@ -395,3 +395,88 @@ function count(x) {
   }
 }
 count(999999);
+
+// Scrivi una funzione che prenda in input una stringa e restituisca TRUE se è palindroma, FALSE se non lo è.
+
+// Primo step: eliminare gli spazi e i segni di punteggiatura:
+// Suggerimento: Puoi eliminare spazi e segni di punteggiatura usando → str.replace(/\W/g, "")
+// Esempio:
+
+// Input: “i topi non avevano nipoti”
+// Output: true
+
+function palindroma(frase2) {
+  let frase1 = "i topi non avevano nipoti";
+
+  let replaced1 = frase1.replace(/\W/g, "");
+  let replaced2 = frase2.replace(/\W/g, "");
+
+  if (replaced1 == replaced2) {
+    console.log("true");
+  } else {
+    console.log("false");
+  }
+}
+palindroma("i  to-  pi no  nave .  vano ni -  pot   i");
+
+// Scrivi un programma che dato un array di 10 numeri interi ordinati in modo casuale li riordini in modo decrescente.
+
+// Esempio:
+// Input: array = [3, 7, -2, 5, 8, 1, 2, 5, 6, -4]
+// Output: [8, 7, 6, 5, 3, 2, 1, -2, -4]
+// Variante:
+// Prova ad ordinali in modo crescente.
+
+function riordina() {
+  let array = [3, 7, -2, 5, 8, 1, 2, 5, 6, -4];
+  let crescente = array.sort((a, b) => a - b);
+  let decrescente = array.sort((a, b) => b - a);
+  console.log(decrescente, crescente);
+}
+riordina();
+
+// Scrivi un programma che dato un array di numeri, calcoli la media dei valori e restituisca in output la media e tutti i valori minori della media:
+
+// Esempio:
+
+//  Input: a = [3, 5, 10, 2, 8]
+//  Output: media = 5.6, valori minori = [3, 5, 2]
+
+// Variante:
+
+// Stampa anche quanti sono i valori minori della media e quanti quelli maggiori.
+
+let a = [3, 5, 10, 2, 8, 90, 41, 4, 7, 87, -1];
+function cose(a) {
+  let somma = a.reduce((acc, n) => acc + n);
+  let media = somma / a.length;
+
+  let riordina = a.sort((a, b) => a - b);
+
+  let minori = [];
+  let maggiori = [];
+
+  minori.push(riordina.slice(0, 3));
+  maggiori.push(riordina.slice(Math.max(riordina.length - 3, 1)));
+
+  console.log(
+    `Media: ${media}\nNumeri Minori: [${minori}]\nNumeri Maggiori: [${maggiori}]`
+  );
+}
+cose(a);
+
+// Crea un oggetto persona con le seguenti caratteristiche:
+
+// nome
+// cognome
+// eta'
+// un metodo che permetta di salutare
+
+let persona = {
+  nome: "Matteo",
+  cognome: "Sartori",
+  età: 26,
+};
+console.log(
+  `Ciao mi chiamo ${persona.nome} ${persona.cognome} e ho ${persona.età} anni`
+);
