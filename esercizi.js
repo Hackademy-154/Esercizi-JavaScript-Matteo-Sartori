@@ -417,7 +417,7 @@ function palindroma(frase2) {
     console.log("false");
   }
 }
-palindroma("i  to-  pi no  nave .  vano ni -  pot   i");
+palindroma("i ' to-  pi no  nave .  vano ni -  pot   i");
 
 // Scrivi un programma che dato un array di 10 numeri interi ordinati in modo casuale li riordini in modo decrescente.
 
@@ -480,3 +480,181 @@ let persona = {
 console.log(
   `Ciao mi chiamo ${persona.nome} ${persona.cognome} e ho ${persona.età} anni`
 );
+
+// Crea un oggetto agenda con una proprietà che comprenda una lista di contatti con un nome e un numero di telefono, ed abbia diverse funzionalità tra cui:
+
+// mostrare tutti i contatti dell’agenda
+// mostrare un singolo contatto
+// eliminare un contatto dall’agenda
+// aggiungere un nuovo contatto
+// modificare un contatto esistente
+// Suggerimento:
+let rubrica = {
+  contacts: [
+    { nome: "Angela", telefono: "3331111111" },
+    { nome: "Annalisa", telefono: "3332222222" },
+    { nome: "Paola", telefono: "3333333333" },
+    { nome: "Emilia", telefono: "3334444444" },
+  ],
+  // Mostra contatti
+  showContacts: function () {
+    this.contacts.forEach((contact) => {
+      console.log(`nome: ${contact.nome}\nnumero è: ${contact.telefono}`);
+    });
+  },
+  // Mostra singolo contatto
+  showSingleContact: function (nome) {
+    let contatto = this.contacts.find((contact) => contact.nome === nome);
+    if (contatto) {
+      console.log(`Contatto richiesto: ${contatto.nome}`);
+    } else {
+      console.log(`contatto non trovato`);
+    }
+  },
+  // Elimina contatto
+  deleteContact: function (nome) {
+    let originalLength = this.contacts.length;
+
+    this.contacts = this.contacts.filter((contatto) => contatto.nome !== nome);
+
+    if (this.contacts.length < originalLength) {
+      rubrica.showContacts();
+      console.log(`Contatto "${nome} eliminato con successo!"`);
+    } else {
+      console.log(`Contatto "${nome} inesistente!"`);
+    }
+  },
+  // Aggiungi contatto
+  addContact: function (nome, telefono) {
+    let newContact = { nome: nome, telefono: telefono };
+    this.contacts.push(newContact);
+    rubrica.showContacts();
+    console.log("Contatto aggiunto con successo!!");
+  },
+  // Modifica contatto esistente
+
+  changeContactPrompt: function () {
+    let contattoCercato = prompt("quale contatto vuoi modificare?");
+    let index = this.contacts.findIndex((obj) => obj.nome == contattoCercato);
+    let nomeModificato = prompt("come vuoi modificare il nome?");
+    let numeroModificato = prompt("come vuoi modificare il numero?");
+    if (
+      nomeModificato != "" &&
+      nomeModificato != " " &&
+      nomeModificato != null &&
+      nomeModificato != undefined
+    ) {
+      this.contacts[index].nome = nomeModificato;
+    }
+    if (
+      numeroModificato != "" &&
+      numeroModificato != " " &&
+      numeroModificato != null &&
+      numeroModificato != undefined
+    ) {
+      this.contacts[index].telefono = numeroModificato;
+    }
+    alert("contatto modificato");
+  },
+};
+
+rubrica.showSingleContact("Angela");
+rubrica.deleteContact("Paola");
+// rubrica.changeContactPrompt();
+rubrica.addContact("Matteo", "333333333333");
+
+// Crea un oggetto bowling con le seguenti caratteristiche:
+
+// una proprietà che comprenda una lista di giocatori con un nome e i relativi punteggi
+// diverse funzionalità tra cui:
+// creare 10 punteggi casuali per ogni giocatore:
+// Suggerimento: questo metodo dovra’ ciclare tutti i giocatori, presenti nell’oggetto bowling, e aggiungere ad ogni proprieta’ scores,
+// dieci punteggi casuali ad ogni giocatore
+// Per generare un punteggio casuale da 1 a 10 → Math.floor(Math.random() * (10 - 1 +1) + 1)
+// trovare il punteggio finale per ogni giocatore:
+
+// aggiungere un nuovo giocatore e creare 10 punti casuali anche per lui
+// determinare il vincitore
+// Suggerimento: ordinare l’array in ordine Decrescente (Attenzione! E’ un array di oggetti: Array.prototype.sort() - JavaScript | MDN )
+// EXTRA:
+
+// Crea un metodo per stilare la classifica finale dei giocatori
+
+// DATI DI PARTENZA:
+
+let bowling = {
+  players: [
+    { name: "Livio", scores: [] },
+    { name: "Paola", scores: [] },
+    { name: "Filippo", scores: [] },
+    { name: "Giuseppe", scores: [] },
+  ],
+
+  setScore: function () {
+    this.players.forEach((element) => {
+      for (let i = 0; i < 11; i++) {
+        element.scores.push(Math.floor(Math.random() * 11));
+      }
+      console.log(element);
+    });
+  },
+
+  setFinalScore: function () {
+    this.players.forEach((element) => {
+      element.finalScore = element.scores.reduce((acc, n) => acc + n, 0);
+    });
+  },
+
+  addNewPlayer: function (name) {
+    let array = [];
+    for (let i = 0; i < 11; i++) {
+      array.push(Math.floor(Math.random() * 11));
+    }
+    this.players.push({ name: name, scores: array });
+  },
+
+  setWinner: function () {
+    this.players.sort((a, b) => b.finalScore - a.finalScore);
+    let winnerScore = this.players[0].finalScore;
+
+    let pareggiatori = [this.players[0]];
+
+    for (let i = 1; i < this.players.length; i++) {
+      if (this.players[i].finalScore == winnerScore) {
+        pareggiatori.push(this.players[i]);
+      }
+    }
+    if (pareggiatori.length >= 2) {
+      console.log("I vincitori a parimerito sono: ");
+      pareggiatori.forEach((element) => {
+        console.log(
+          `${element.name} con un punteggio di ${element.finalScore} punti`
+        );
+      });
+      for (let i = pareggiatori.length; i < this.players.length; i++) {
+        console.log(
+          `${i - 1}° ${this.players[i].name} con un punteggio di: ${
+            this.players[i].finalScore
+          } `
+        );
+      }
+    } else if ((pareggiatori.length = 1)) {
+      console.log(
+        `Il vincitore è ${this.players[0].name} con un punteggio di: ${this.players[0].finalScore} `
+      );
+      for (let i = 1; i < this.players.length; i++) {
+        console.log(
+          `${i + 1}° ${this.players[i].name} punteggio di: ${
+            this.players[i].finalScore
+          }`
+        );
+      }
+    }
+  },
+};
+
+bowling.setScore();
+bowling.addNewPlayer("Pollo");
+bowling.setFinalScore();
+bowling.setWinner();
+console.log(bowling);
