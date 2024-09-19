@@ -504,12 +504,21 @@ let rubrica = {
   },
   // Mostra singolo contatto
   showSingleContact: function (nome) {
-    let contatto = this.contacts.find((contact) => contact.nome === nome);
-    if (contatto) {
-      console.log(`Contatto richiesto: ${contatto.nome}`);
-    } else {
-      console.log(`contatto non trovato`);
-    }
+    // let contatto = this.contacts.find((contact) => contact.nome === nome);
+    // if (contatto) {
+    //   console.log(`Contatto richiesto: ${contatto.nome}`);
+    // } else {
+    //   console.log(`contatto non trovato`);
+    // }
+    let trovato = this.contacts.filter((element) => element.nome == nome);
+    console.log(trovato[0].telefono);
+
+    let trovato2 = this.contacts.forEach((element) => {
+      if (element.nome == nome) {
+        console.log(element.telefono);
+      }
+    });
+    return trovato2;
   },
   // Elimina contatto
   deleteContact: function (nome) {
